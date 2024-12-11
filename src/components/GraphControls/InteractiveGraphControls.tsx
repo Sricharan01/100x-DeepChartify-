@@ -63,6 +63,7 @@ const InteractiveGraphControls: React.FC<InteractiveGraphControlsProps> = ({
 }) => {
   const [selectedColumns, setSelectedColumns] = useState<string[]>([]);
   const [selectedChartType, setSelectedChartType] = useState('bar');
+  const [error, setError] = useState<string | null>(null);
 
   // Function to calculate quartiles and IQR
   const calculateQuartiles = (values: number[]) => {
@@ -107,6 +108,7 @@ const InteractiveGraphControls: React.FC<InteractiveGraphControlsProps> = ({
   const handleChartTypeChange = (type: string) => {
     setSelectedChartType(type);
     if (type === 'pie') {
+      // Reset columns when switching to pie chart
       setSelectedColumns([]);
     }
   };
@@ -122,21 +124,25 @@ const InteractiveGraphControls: React.FC<InteractiveGraphControlsProps> = ({
         <h3 className="text-lg font-semibold text-gray-900">
           Customize Your Visualization
         </h3>
-
         <ChartTypeSelector
           selectedType={selectedChartType}
           onTypeSelect={handleChartTypeChange}
           disabled={loading}
         />
-
+        {selectedChartType === 'pie' ? (
+          <div className="text-sm text-gray-600 mb-4">
+            For pie charts, select one column
+          </div>
+        ) : null}
         <ColumnSelector
           columns={columns}
           selectedColumns={selectedColumns}
           onColumnSelect={handleColumnSelect}
           disabled={loading}
+          // Pass the current chart type to control axis visibility
+          chartType={selectedChartType}
         />
       </div>
-
       {canShowChart && (
         <div className="bg-white p-6 rounded-lg shadow-sm">
           <ChartDisplay
