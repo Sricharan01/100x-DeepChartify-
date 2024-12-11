@@ -129,11 +129,11 @@ const InteractiveGraphControls: React.FC<InteractiveGraphControlsProps> = ({
           onTypeSelect={handleChartTypeChange}
           disabled={loading}
         />
-        {selectedChartType === 'pie' ? (
+        {/* {selectedChartType === 'pie' ? (
           <div className="text-sm text-gray-600 mb-4">
             For pie charts, select one column
           </div>
-        ) : null}
+        ) : null} */}
         <ColumnSelector
           columns={columns}
           selectedColumns={selectedColumns}
