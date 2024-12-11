@@ -8,8 +8,6 @@ import {
   LineElement,
   BarElement,
   Title,
-
-  
   Tooltip,
   Legend,
   ArcElement,
@@ -33,8 +31,6 @@ ChartJS.register(
   Filler
 );
 
-
-import { ChartConfiguration } from 'chart.js';
 
 const getColor = (index: number, alpha = 0.7) => 
   `hsla(${index * 137.5}, 70%, 50%, ${alpha})`;
@@ -136,3 +132,5 @@ export function createChartData(
     datasets: []
   };
 }
+
+export default chartUtils;
